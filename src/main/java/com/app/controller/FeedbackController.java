@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import com.app.service.FeedBackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.app.exceptions.LoginException;
 import com.app.exceptions.feedbackException;
 import com.app.model.Feedback;
-import com.app.service.FeedBackService;
+
 
 @RestController
 @RequestMapping("/feedback/")
@@ -30,6 +31,7 @@ public class FeedbackController {
     public ResponseEntity<List <Feedback>> getAllFeedback()throws feedbackException {
 		
         return new ResponseEntity<List <Feedback>>(fService.viewAllFeedBack(),HttpStatus.OK);
+
     }
 	
 	@PostMapping("/save/{busid}/{key}")
@@ -47,13 +49,13 @@ public class FeedbackController {
 		
 		return new ResponseEntity<Feedback>(feedback,HttpStatus.OK); 
     }
-		
-	
+
 	@PutMapping("/update{key}")
     public ResponseEntity<Feedback> updateRouteById(@Valid @RequestBody Feedback feedback,@PathVariable("key") String key)throws feedbackException, LoginException {
-		
-		return new ResponseEntity<Feedback>(fService.updateFeedBack(feedback,key),HttpStatus.OK);
+        System.out.println("hello rajesh");
+        return new ResponseEntity<Feedback>(fService.updateFeedBack(feedback,key),HttpStatus.OK);
+
     }
-	
+
 
 }
